@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:onboarding_form/core/design_system/components/regular_filled_button.dart';
 import 'package:onboarding_form/ui/screens/step_breed_page.dart';
 
+import 'core/design_system/theme_data.dart';
 import 'di/dependencies.dart';
 
 void main() {
@@ -18,19 +20,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Onboarding Form',
+      theme: LightThemeVariation().lightAppThemeData,
+      darkTheme: DarkThemeVariation().darkAppThemeData,
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -51,13 +50,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text('Onboarding Form'),
       ),
-      body: PageView(
-        controller: _controller,
-        physics: const NeverScrollableScrollPhysics(), // disable swipe
-        children: const [StepBreedPage()],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: SafeArea(
+        child: Column(
+          children: [
+            Flexible(
+              child: PageView(
+                controller: _controller,
+                physics: const NeverScrollableScrollPhysics(), // disable swipe
+                children: const [StepBreedPage()],
+              ),
+            ),
+            RegularFilledButton(onPressed: () {}, child: Text('Continue')),
+          ],
+        ),
+      ),
     );
   }
 }

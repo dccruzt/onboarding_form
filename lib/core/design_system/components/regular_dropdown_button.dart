@@ -1,23 +1,5 @@
 import 'package:flutter/material.dart';
 
-class DropdownItem {
-  const DropdownItem({required this.id, required this.name});
-
-  final String id;
-  final String name;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is DropdownItem &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          name == other.name;
-
-  @override
-  int get hashCode => id.hashCode;
-}
-
 class RegularDropdownButton extends StatefulWidget {
   const RegularDropdownButton({
     super.key,
@@ -68,4 +50,22 @@ class _RegularDropdownButtonState extends State<RegularDropdownButton> {
       }).toList(),
     );
   }
+}
+
+class DropdownItem {
+  const DropdownItem({required this.id, required this.name});
+
+  final String id;
+  final String name;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DropdownItem &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name;
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
