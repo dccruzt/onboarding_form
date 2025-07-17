@@ -1,0 +1,8 @@
+[
+  {"id": "bulldog", "name": "Bulldog"},
+  {"id": "beagle", "name": "Beagle"},
+  {"id": "poodle", "name": "Poodle"},
+  {"id": "labrador", "name": "Labrador Retriever"},
+  {"id": "german-shepherd", "name": "German Shepherd"},
+  {"id": "golden-retriever", "name": "Golden Retriever"}
+]
