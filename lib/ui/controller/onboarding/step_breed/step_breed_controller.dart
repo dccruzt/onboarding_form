@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../../../di/dependencies.dart';
-import '../../../domain/entities/breed.dart';
-import '../../../domain/use_cases/load_breeds_use_case.dart';
+import '../../../../di/dependencies.dart';
+import '../../../../domain/entities/breed.dart';
+import '../../../../domain/use_cases/load_breeds_use_case.dart';
 import 'step_breed_state.dart';
 
 class StepBreedCubitProvider extends BlocProvider<StepBreedCubit> {

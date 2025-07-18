@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../domain/entities/breed.dart';
+import '../../../../domain/entities/breed.dart';
 
 class StepBreedState extends Equatable {
   const StepBreedState({this.breeds = const [], this.error});

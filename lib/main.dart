@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:onboarding_form/core/design_system/components/regular_filled_button.dart';
-import 'package:onboarding_form/ui/screens/step_breed_page.dart';
 
+import 'core/design_system/components/regular_filled_button.dart';
+import 'core/design_system/spacings.dart';
 import 'core/design_system/theme_data.dart';
+import 'core/navigation/app_routes.dart';
 import 'di/dependencies.dart';
+import 'ui/screens/onboarding_screen.dart';
 
 void main() {
   _setupDependencies();
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
       theme: LightThemeVariation().lightAppThemeData,
       darkTheme: DarkThemeVariation().darkAppThemeData,
       home: const MyHomePage(),
+      routes: {AppRoutes.onboarding: (context) => const OnboardingScreen()},
     );
   }
 }
@@ -36,15 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final PageController _controller = PageController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,19 +47,19 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Onboarding Form'),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Flexible(
-              child: PageView(
-                controller: _controller,
-                physics: const NeverScrollableScrollPhysics(), // disable swipe
-                children: const [StepBreedPage()],
-              ),
-            ),
-            RegularFilledButton(onPressed: () {}, child: Text('Continue')),
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Let\'s get started!'),
+              const SizedBox(height: x2),
+              RegularFilledButton(onPressed: _onPressed, text: 'Start'),
+            ],
+          ),
         ),
       ),
     );
   }
+
+  void _onPressed() => Navigator.pushNamed(context, AppRoutes.onboarding);
 }
