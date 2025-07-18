@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/design_system/components/regular_filled_button.dart';
 import '../controller/onboarding/onboarding_controller.dart';
-import '../controller/onboarding/onboarding_state.dart';
 import 'steps/step_birthday_page.dart';
 import 'steps/step_breed_page.dart';
 import 'steps/step_details_page.dart';

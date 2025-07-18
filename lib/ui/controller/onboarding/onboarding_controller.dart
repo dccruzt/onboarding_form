@@ -1,8 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-
-import 'onboarding_state.dart';
 
 class OnboardingCubitProvider extends BlocProvider<OnboardingCubit> {
   OnboardingCubitProvider({
@@ -34,4 +33,17 @@ class OnboardingCubit extends Cubit<OnboardingState> {
 
   void _emit({int? step, Object? error}) =>
       emit(state.copyWith(step: step, error: error));
+}
+
+class OnboardingState extends Equatable {
+  const OnboardingState({this.step = 0, this.error});
+
+  final int step;
+  final Object? error;
+
+  OnboardingState copyWith({int? step, Object? error}) =>
+      OnboardingState(step: step ?? this.step, error: error ?? this.error);
+
+  @override
+  List<Object?> get props => [step, error];
 }
