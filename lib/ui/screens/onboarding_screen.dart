@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/design_system/components/regular_filled_button.dart';
+import '../../core/design_system/spacings.dart';
 import '../controller/onboarding/onboarding_controller.dart';
+import '../widgets/form_content.dart';
 import 'steps/step_birthday_page.dart';
 import 'steps/step_breed_page.dart';
 import 'steps/step_details_page.dart';
@@ -46,26 +48,34 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               final progress = (state.step + 1) / OnboardingCubit.totalSteps;
 
               return Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   LinearProgressIndicator(value: progress),
                   Flexible(
-                    child: PageView(
-                      controller: _controller,
-                      physics:
-                          const NeverScrollableScrollPhysics(), // disable swipe
-                      children: const [
-                        StepBreedPage(),
-                        StepNamePage(),
-                        StepDetailsPage(),
-                        StepBirthdayPage(),
-                        StepWeightPage(),
+                    child: FormContent(
+                      children: [
+                        Flexible(
+                          child: PageView(
+                            controller: _controller,
+                            physics:
+                                const NeverScrollableScrollPhysics(), // disable swipe
+                            children: const [
+                              StepBreedPage(),
+                              StepNamePage(),
+                              StepDetailsPage(),
+                              StepBirthdayPage(),
+                              StepWeightPage(),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: x3),
+                        RegularFilledButton(
+                          onPressed: () => _onPressed(context),
+                          text: 'Continue',
+                          expanded: true,
+                        ),
                       ],
                     ),
-                  ),
-                  RegularFilledButton(
-                    onPressed: () => _onPressed(context),
-                    text: 'Continue',
-                    expanded: true,
                   ),
                 ],
               );

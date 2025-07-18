@@ -4,6 +4,9 @@ import 'spacings.dart';
 
 part 'app_colors.dart';
 part 'color_scheme.dart';
+part 'theme_data/app_bar_theme.dart';
+part 'theme_data/button_theme.dart';
+part 'theme_data/text_theme.dart';
 
 class LightThemeVariation {
   static final _colorScheme = _CustomColorScheme.light;
@@ -14,6 +17,9 @@ class LightThemeVariation {
     textTheme: _textTheme(_colorScheme),
     appBarTheme: _appBarTheme(_colorScheme),
     filledButtonTheme: _filledButtonTheme(_colorScheme),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      linearTrackColor: _colorScheme.surfaceContainerHighest,
+    ),
   );
 }
 
@@ -26,95 +32,8 @@ class DarkThemeVariation {
     textTheme: _textTheme(_colorScheme),
     appBarTheme: _appBarTheme(_colorScheme),
     filledButtonTheme: _filledButtonTheme(_colorScheme),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      linearTrackColor: _colorScheme.surfaceContainerHighest,
+    ),
   );
 }
-
-TextTheme _textTheme(ColorScheme colors) => TextTheme(
-  headlineLarge: TextStyle(
-    fontSize: 32.0,
-    fontWeight: FontWeight.bold,
-    color: colors.onSurface,
-    height: 44 / 32,
-    letterSpacing: 0.8,
-  ),
-  headlineSmall: TextStyle(
-    fontSize: 24.0,
-    fontWeight: FontWeight.w500,
-    color: colors.onSurface,
-    height: 32 / 24,
-  ),
-  // title
-  titleLarge: TextStyle(
-    fontSize: 24.0,
-    fontWeight: FontWeight.w700,
-    color: colors.onSurface,
-    height: 32 / 24,
-  ),
-  titleMedium: TextStyle(
-    fontSize: 16.0,
-    fontWeight: FontWeight.w600,
-    color: colors.onSurface,
-    height: 24 / 16,
-  ),
-  titleSmall: TextStyle(
-    fontSize: 14.0,
-    fontWeight: FontWeight.w500,
-    color: colors.onSurface,
-    height: 18 / 14,
-  ),
-  // label
-  labelLarge: TextStyle(
-    fontSize: 16.0,
-    fontWeight: FontWeight.bold,
-    height: 24 / 16,
-    letterSpacing: 0.2,
-    color: colors.onSurface,
-  ),
-  // Caption
-  labelMedium: TextStyle(
-    fontSize: 12.0,
-    fontWeight: FontWeight.w500,
-    height: 16 / 12,
-    color: colors.onSurfaceVariant,
-  ),
-  // body
-  bodyMedium: TextStyle(
-    fontSize: 16.0,
-    fontWeight: FontWeight.w400,
-    color: colors.onSurfaceVariant,
-    height: 24 / 16,
-  ),
-  bodyLarge: TextStyle(
-    fontSize: 16.0,
-    fontWeight: FontWeight.w500,
-    color: colors.onSurfaceVariant,
-    height: 24 / 16,
-  ),
-).apply(fontFamily: 'Inter');
-
-AppBarTheme _appBarTheme(ColorScheme colors) => AppBarTheme(
-  elevation: 0,
-  scrolledUnderElevation: 0,
-  backgroundColor: colors.surfaceContainer,
-  foregroundColor: colors.primary,
-  titleTextStyle: _textTheme(colors).labelLarge,
-  titleSpacing: x1,
-  centerTitle: false,
-);
-
-FilledButtonThemeData _filledButtonTheme(ColorScheme colors) =>
-    FilledButtonThemeData(
-      style: FilledButton.styleFrom(
-        textStyle: _textTheme(colors).labelLarge,
-        elevation: 0.0,
-        fixedSize: null,
-        padding: const EdgeInsets.symmetric(horizontal: x8, vertical: x4),
-        maximumSize: Size.infinite,
-        side: BorderSide.none,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(x8)),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        animationDuration: kThemeChangeDuration,
-        enableFeedback: true,
-        alignment: Alignment.center,
-      ),
-    );
