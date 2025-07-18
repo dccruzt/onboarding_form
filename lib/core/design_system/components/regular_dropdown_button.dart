@@ -28,26 +28,22 @@ class _RegularDropdownButtonState extends State<RegularDropdownButton> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return DropdownButton<DropdownItem>(
-      value: _dropdownValue,
-      style: theme.textTheme.bodyLarge,
-      underline: Container(height: 2),
-      onChanged: (DropdownItem? value) {
+    return DropdownMenu<DropdownItem>(
+      initialSelection: _dropdownValue,
+      onSelected: (DropdownItem? value) {
         setState(() {
           _dropdownValue = value!;
           widget.onTap.call(value);
         });
       },
-      items: widget.items.map<DropdownMenuItem<DropdownItem>>((
-        DropdownItem value,
-      ) {
-        return DropdownMenuItem<DropdownItem>(
-          value: value,
-          child: Text(value.name),
-        );
-      }).toList(),
+      dropdownMenuEntries: widget.items
+          .map<DropdownMenuEntry<DropdownItem>>(
+            (DropdownItem value) => DropdownMenuEntry<DropdownItem>(
+              value: value,
+              label: value.name,
+            ),
+          )
+          .toList(),
     );
   }
 }

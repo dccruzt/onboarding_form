@@ -20,7 +20,7 @@ class StepBreedPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('What breed is your doggy?'),
-              const SizedBox(height: x2),
+              const SizedBox(height: x3),
               if (state.breeds.isNotEmpty)
                 RegularDropdownButton(
                   items: state.breeds.toDropdownItemList(),

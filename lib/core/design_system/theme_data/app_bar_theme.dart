@@ -1,11 +1,11 @@
 part of '../theme_data.dart';
 
-AppBarTheme _appBarTheme(ColorScheme colors) => AppBarTheme(
+AppBarTheme _appBarTheme(ColorScheme colorScheme) => AppBarTheme(
   elevation: 0,
   scrolledUnderElevation: 0,
-  backgroundColor: colors.surfaceContainer,
-  foregroundColor: colors.primary,
-  titleTextStyle: _textTheme(colors).labelLarge,
+  backgroundColor: colorScheme.surfaceContainer,
+  foregroundColor: colorScheme.primary,
+  titleTextStyle: _textTheme(colorScheme).labelLarge,
   titleSpacing: x1,
   centerTitle: false,
 );
