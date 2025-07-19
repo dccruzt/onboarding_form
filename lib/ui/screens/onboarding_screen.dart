@@ -29,7 +29,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  void _onCubitStepChanged(int step) {
+  void _onCubitStepChanged(BuildContext context, int step) {
+    OnboardingCubitProvider.of(context).performValidations();
+
     _controller.animateToPage(
       step,
       duration: const Duration(milliseconds: 300),
@@ -41,7 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return OnboardingCubitProvider(
       child: BlocConsumer<OnboardingCubit, OnboardingState>(
-        listener: (context, state) => _onCubitStepChanged(state.index),
+        listener: (context, state) => _onCubitStepChanged(context, state.index),
         builder: (context, state) {
           final progress = (state.index + 1) / OnboardingCubit.totalSteps;
 
@@ -73,7 +75,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 const NeverScrollableScrollPhysics(), // disable swipe
                             children: [
                               StepBreedPage(),
-                              StepNamePage(breed: state.selectedBreed),
+                              StepNamePage(
+                                breed: state.selectedBreed,
+                                name: state.name,
+                              ),
                               StepDetailsPage(),
                               StepBirthdayPage(),
                               StepWeightPage(),
@@ -85,6 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           onPressed: () => _onPressed(context),
                           text: 'Continue',
                           expanded: true,
+                          enabled: state.submitButtonEnabled,
                         ),
                       ],
                     ),

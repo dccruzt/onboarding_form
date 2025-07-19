@@ -13,9 +13,17 @@ class StepBreedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final onboardingCubit = OnboardingCubitProvider.of(context);
+    final onboardingState = onboardingCubit.state;
 
     return StepBreedCubitProvider(
-      child: BlocBuilder<StepBreedCubit, StepBreedState>(
+      child: BlocConsumer<StepBreedCubit, StepBreedState>(
+        listener: (context, state) {
+          if (state.breeds.isNotEmpty &&
+              onboardingState.selectedBreed == null) {
+            onboardingCubit.selectBreed(state.breeds.first);
+          }
+        },
         builder: (context, state) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -28,9 +36,10 @@ class StepBreedPage extends StatelessWidget {
               if (state.breeds.isNotEmpty)
                 RegularDropdownButton<Breed>(
                   items: state.breeds,
-                  selectedItem: state.breeds.first,
+                  selectedItem:
+                      onboardingState.selectedBreed ?? state.breeds.first,
                   labelBuilder: (breed) => breed.name,
-                  onTap: OnboardingCubitProvider.of(context).selectBreed,
+                  onTap: onboardingCubit.selectBreed,
                 ),
             ],
           );

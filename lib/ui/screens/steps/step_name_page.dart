@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../../../core/design_system/spacings.dart';
 import '../../../domain/entities/breed.dart';
+import '../../controller/onboarding/onboarding_controller.dart';
 
 class StepNamePage extends StatefulWidget {
-  const StepNamePage({super.key, required this.breed});
+  const StepNamePage({super.key, required this.breed, this.name});
 
   final Breed? breed;
+  final String? name;
 
   @override
   State<StepNamePage> createState() => _StepNamePageState();
 }
 
 class _StepNamePageState extends State<StepNamePage> {
-  final FocusNode _focusNode = FocusNode();
-  final TextEditingController _controller = TextEditingController();
+  final _focusNode = FocusNode();
+  late final _controller = TextEditingController(text: widget.name);
 
   @override
   void dispose() {
@@ -43,6 +45,7 @@ class _StepNamePageState extends State<StepNamePage> {
           controller: _controller,
           autofocus: true,
           textCapitalization: TextCapitalization.words,
+          onChanged: OnboardingCubitProvider.of(context).setName,
         ),
       ],
     );

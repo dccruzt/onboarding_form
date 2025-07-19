@@ -1,8 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onboarding_form/domain/entities/breed.dart';
 import 'package:provider/provider.dart';
+
+import '../../../domain/entities/breed.dart';
+import '../../../domain/entities/step.dart';
+import '../../extensions/int_ext.dart';
 
 class OnboardingCubitProvider extends BlocProvider<OnboardingCubit> {
   OnboardingCubitProvider({
@@ -36,25 +39,80 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     _emit(selectedBreed: breed);
   }
 
-  void _emit({int? index, Breed? selectedBreed, Object? error}) => emit(
-    state.copyWith(index: index, selectedBreed: selectedBreed, error: error),
+  void setName(String name) {
+    _emit(name: name);
+  }
+
+  void performValidations() {
+    switch (state.index.toStep()) {
+      case Step.breed:
+        break;
+      case Step.name:
+        _emit(submitButtonEnabled: state.isNameValid);
+        break;
+      case Step.details:
+        break;
+      case Step.birthday:
+        break;
+      case Step.weight:
+        break;
+    }
+  }
+
+  void _emit({
+    int? index,
+    bool? submitButtonEnabled,
+    Breed? selectedBreed,
+    String? name,
+    Object? error,
+  }) => emit(
+    state.copyWith(
+      index: index,
+      submitButtonEnabled: submitButtonEnabled,
+      selectedBreed: selectedBreed,
+      name: name,
+      error: error,
+    ),
   );
 }
 
 class OnboardingState extends Equatable {
-  const OnboardingState({this.index = 0, this.selectedBreed, this.error});
+  const OnboardingState({
+    this.index = 0,
+    this.submitButtonEnabled = true,
+    this.selectedBreed,
+    this.name,
+    this.error,
+  });
 
   final int index;
+  final bool submitButtonEnabled;
   final Breed? selectedBreed;
+  final String? name;
   final Object? error;
 
-  OnboardingState copyWith({int? index, Breed? selectedBreed, Object? error}) =>
-      OnboardingState(
-        index: index ?? this.index,
-        selectedBreed: selectedBreed ?? this.selectedBreed,
-        error: error ?? this.error,
-      );
+  bool get isNameValid => name?.trim().isNotEmpty ?? false;
+
+  OnboardingState copyWith({
+    int? index,
+    bool? submitButtonEnabled,
+    Breed? selectedBreed,
+    String? name,
+    Object? error,
+  }) => OnboardingState(
+    index: index ?? this.index,
+    submitButtonEnabled: submitButtonEnabled ?? this.submitButtonEnabled,
+    selectedBreed: selectedBreed ?? this.selectedBreed,
+    name: name ?? this.name,
+    error: error ?? this.error,
+  );
 
   @override
-  List<Object?> get props => [index, selectedBreed, error];
+  List<Object?> get props => [
+    index,
+    submitButtonEnabled,
+    selectedBreed,
+    name,
+    error,
+  ];
 }

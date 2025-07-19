@@ -12,4 +12,15 @@ class Breed {
   factory Breed.fromJson(Map<String, dynamic> json) => _$BreedFromJson(json);
 
   Map<String, dynamic> toJson() => _$BreedToJson(this);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Breed &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name;
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }

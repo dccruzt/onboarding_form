@@ -5,11 +5,13 @@ class RegularFilledButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.text,
+    this.enabled = true,
     this.expanded = false,
   });
 
   final VoidCallback onPressed;
   final String text;
+  final bool enabled;
   final bool expanded;
 
   @override
@@ -20,7 +22,7 @@ class RegularFilledButton extends StatelessWidget {
           Size(expanded ? double.infinity : _minButtonHeight, _minButtonHeight),
         ),
       ),
-      onPressed: onPressed,
+      onPressed: enabled ? () => onPressed() : null,
       child: Text(text),
     );
   }
