@@ -38,16 +38,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: OnboardingCubitProvider(
-          child: BlocConsumer<OnboardingCubit, OnboardingState>(
-            listener: (context, state) => _onCubitStepChanged(state.step),
-            builder: (context, state) {
-              final progress = (state.step + 1) / OnboardingCubit.totalSteps;
+    return OnboardingCubitProvider(
+      child: BlocConsumer<OnboardingCubit, OnboardingState>(
+        listener: (context, state) => _onCubitStepChanged(state.step),
+        builder: (context, state) {
+          final progress = (state.step + 1) / OnboardingCubit.totalSteps;
 
-              return Column(
+          return Scaffold(
+            appBar: AppBar(
+              leading: BackButton(
+                onPressed: () => state.step == 0
+                    ? Navigator.of(context).pop()
+                    : OnboardingCubitProvider.of(context).previousStep(),
+              ),
+            ),
+            body: SafeArea(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   LinearProgressIndicator(value: progress),
@@ -78,10 +84,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
                 ],
-              );
-            },
-          ),
-        ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
