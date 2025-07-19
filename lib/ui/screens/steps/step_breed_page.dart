@@ -28,6 +28,8 @@ class StepBreedPage extends StatelessWidget {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset('assets/images/search.png', width: x15, height: x15),
+              const SizedBox(height: x4),
               Text(
                 'What breed is your doggy?',
                 style: theme.textTheme.headlineSmall,

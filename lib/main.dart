@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'core/design_system/components/regular_filled_button.dart';
 import 'core/design_system/spacings.dart';
@@ -41,18 +42,23 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Onboarding Form'),
-      ),
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Let\'s get started!'),
+              SvgPicture.asset(
+                'assets/images/dogs_variety.svg',
+                width: 200,
+                height: 200,
+              ),
+              const SizedBox(height: x4),
+              Text('Let\'s get started!', style: theme.textTheme.headlineSmall),
               const SizedBox(height: x2),
+              const SizedBox(height: x4),
               RegularFilledButton(onPressed: _onPressed, text: 'Start'),
             ],
           ),

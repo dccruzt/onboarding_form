@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../core/design_system/spacings.dart';
 import '../../../domain/entities/breed.dart';
@@ -34,6 +35,8 @@ class _StepNamePageState extends State<StepNamePage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        SvgPicture.asset('assets/images/dog_head.svg', width: x20, height: x20),
+        const SizedBox(height: x4),
         Text(
           'What is the name of your $label?',
           style: theme.textTheme.headlineSmall,
