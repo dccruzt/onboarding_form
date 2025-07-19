@@ -46,15 +46,19 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   void performValidations() {
     switch (state.index.toStep()) {
       case Step.breed:
+        _emit(submitButtonEnabled: true);
         break;
       case Step.name:
         _emit(submitButtonEnabled: state.isNameValid);
         break;
       case Step.details:
+        _emit(submitButtonEnabled: true);
         break;
       case Step.birthday:
+        _emit(submitButtonEnabled: true);
         break;
       case Step.weight:
+        _emit(submitButtonEnabled: true);
         break;
     }
   }
