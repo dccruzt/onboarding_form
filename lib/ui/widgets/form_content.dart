@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../common/design_system/components/regular_filled_button.dart';
-import '../../common/design_system/extensions/widget_list_ext.dart';
 import '../../common/design_system/spacings.dart';
 
 class FormContent extends StatelessWidget {
@@ -9,11 +8,13 @@ class FormContent extends StatelessWidget {
     super.key,
     required this.body,
     this.submitEnabled = false,
+    this.submitType = SubmitType.next,
     required this.onSubmitPressed,
   });
 
   final Widget body;
   final bool submitEnabled;
+  final SubmitType submitType;
 
   final VoidCallback onSubmitPressed;
 
@@ -26,12 +27,21 @@ class FormContent extends StatelessWidget {
           Flexible(child: body),
           RegularFilledButton(
             onPressed: onSubmitPressed,
-            text: 'Continue',
+            text: submitType.isNext ? 'Continue' : 'Submit',
             expanded: true,
             enabled: submitEnabled,
           ),
-        ].withX4Spacer(),
+        ],
       ),
     );
   }
+}
+
+enum SubmitType {
+  next,
+  submit;
+
+  bool get isNext => this == SubmitType.next;
+
+  bool get isSubmit => this == SubmitType.submit;
 }

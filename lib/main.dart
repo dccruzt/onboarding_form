@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'common/design_system/components/regular_filled_button.dart';
+import 'common/design_system/images/asset_names.dart';
 import 'common/design_system/spacings.dart';
 import 'common/design_system/theme_data.dart';
 import 'common/navigation/app_routes.dart';
@@ -54,11 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'assets/images/dogs_variety.svg',
-                width: 200,
-                height: 200,
-              ),
+              SvgPicture.asset(AssetNames.dogsVariety, width: 200, height: 200),
               const SizedBox(height: x4),
               Text('Let\'s get started!', style: theme.textTheme.headlineSmall),
               const SizedBox(height: x2),

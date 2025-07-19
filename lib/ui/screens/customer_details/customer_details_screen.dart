@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../common/design_system/extensions/widget_list_ext.dart';
+import '../../../common/design_system/images/asset_names.dart';
 import '../../../common/design_system/spacings.dart';
 import '../../controller/customer_details/customer_details_controller.dart';
+import '../../widgets/form_body.dart';
 import '../../widgets/form_content.dart';
 
 class CustomerDetailsScreen extends StatefulWidget {
@@ -25,57 +26,52 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
   @override
   void dispose() {
     _addressController.dispose();
+    _nameController.dispose();
+
     _addressFocusNode.dispose();
+    _nameFocusNode.dispose();
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: Padding(
-            padding: EdgeInsets.all(x3),
-            child: CustomerDetailsCubitProvider(
-              child: BlocListener<CustomerDetailsCubit, CustomerDetailsState>(
-                listener: (context, state) {
-                  _addressController.text = state.address ?? '';
-                },
-                child: FormContent(
-                  body: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/thumbs_up.png',
-                        width: x15,
-                        height: x15,
-                      ),
-                      Text(
-                        'We are almost there! Please provide your name and address',
-                        style: theme.textTheme.headlineSmall,
-                        textAlign: TextAlign.center,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(labelText: 'Name'),
-                        controller: _nameController,
-                        focusNode: _nameFocusNode,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(labelText: 'Address'),
-                        controller: _addressController,
-                        focusNode: _addressFocusNode,
-                        autofocus: true,
-                      ),
-                    ].withX4Spacer(),
+          child: CustomerDetailsCubitProvider(
+            child: BlocListener<CustomerDetailsCubit, CustomerDetailsState>(
+              listener: (context, state) {
+                _addressController.text = state.address ?? '';
+              },
+              child: FormContent(
+                body: FormBody(
+                  header: Image.asset(
+                    AssetNames.thumbsUp,
+                    width: x15,
+                    height: x15,
                   ),
-                  onSubmitPressed: () {},
+                  title:
+                      'We are almost there! Please provide your name and address',
+                  body: [
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Name'),
+                      controller: _nameController,
+                      focusNode: _nameFocusNode,
+                      autofocus: true,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Address'),
+                      controller: _addressController,
+                      focusNode: _addressFocusNode,
+                    ),
+                  ],
                 ),
+                submitType: SubmitType.submit,
+                onSubmitPressed: () {},
               ),
             ),
           ),

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onboarding_form/common/design_system/extensions/widget_list_ext.dart';
 
 import '../../../../common/design_system/components/regular_dropdown_button.dart';
+import '../../../../common/design_system/images/asset_names.dart';
 import '../../../../common/design_system/spacings.dart';
 import '../../../../domain/entities/breed.dart';
 import '../../../controller/onboarding/onboarding_controller.dart';
 import '../../../controller/onboarding/steps/step_breed_controller.dart';
+import '../../../widgets/form_body.dart';
 
 class StepBreedPage extends StatelessWidget {
   const StepBreedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final onboardingCubit = OnboardingCubitProvider.of(context);
     final onboardingState = onboardingCubit.state;
 
@@ -26,14 +26,10 @@ class StepBreedPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/search.png', width: x15, height: x15),
-              Text(
-                'What breed is your doggy?',
-                style: theme.textTheme.headlineSmall,
-              ),
+          return FormBody(
+            header: Image.asset(AssetNames.search, width: x15, height: x15),
+            title: 'What breed is your doggy?',
+            body: [
               if (state.breeds.isNotEmpty)
                 RegularDropdownButton<Breed>(
                   items: state.breeds,
@@ -42,7 +38,7 @@ class StepBreedPage extends StatelessWidget {
                   labelBuilder: (breed) => breed.name,
                   onTap: onboardingCubit.selectBreed,
                 ),
-            ].withX4Spacer(),
+            ],
           );
         },
       ),

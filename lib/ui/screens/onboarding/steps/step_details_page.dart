@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../../common/design_system/extensions/widget_list_ext.dart';
+import '../../../widgets/form_body.dart';
 
 class StepDetailsPage extends StatelessWidget {
   const StepDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Details Step', style: theme.textTheme.headlineSmall),
-      ].withX4Spacer(),
-    );
+    return FormBody(title: 'Details Step', body: []);
   }
 }
