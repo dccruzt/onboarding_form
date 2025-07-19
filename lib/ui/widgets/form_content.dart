@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/design_system/spacings.dart';
+import '../../common/design_system/spacings.dart';
 
 class FormContent extends StatelessWidget {
   const FormContent({super.key, required this.children});

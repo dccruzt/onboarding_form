@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/design_system/spacings.dart';
+import '../../../common/design_system/spacings.dart';
 import '../../../domain/entities/breed.dart';
 import '../../controller/onboarding/onboarding_controller.dart';
 

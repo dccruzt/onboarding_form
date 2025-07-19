@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'core/design_system/components/regular_filled_button.dart';
-import 'core/design_system/spacings.dart';
-import 'core/design_system/theme_data.dart';
-import 'core/navigation/app_routes.dart';
+import 'common/design_system/components/regular_filled_button.dart';
+import 'common/design_system/spacings.dart';
+import 'common/design_system/theme_data.dart';
+import 'common/navigation/app_routes.dart';
 import 'di/dependencies.dart';
 import 'ui/screens/onboarding_screen.dart';
 
