@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../common/design_system/components/regular_filled_button.dart';
-import '../../../common/design_system/spacings.dart';
 import '../../../common/navigation/app_routes.dart';
 import '../../controller/onboarding/onboarding_controller.dart';
 import '../../extensions/int_ext.dart';
@@ -63,37 +61,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   LinearProgressIndicator(value: progress),
                   Flexible(
                     child: FormContent(
-                      children: [
-                        Flexible(
-                          child: PageView(
-                            controller: _controller,
-                            onPageChanged: (index) {
-                              if (!index.toStep().isName) {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                              }
-                            },
-                            physics:
-                                const NeverScrollableScrollPhysics(), // disable swipe
-                            children: [
-                              StepBreedPage(),
-                              StepNamePage(
-                                breed: state.selectedBreed,
-                                name: state.name,
-                              ),
-                              StepDetailsPage(),
-                              StepBirthdayPage(),
-                              StepWeightPage(),
-                            ],
+                      body: PageView(
+                        controller: _controller,
+                        onPageChanged: (index) {
+                          if (!index.toStep().isName) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          }
+                        },
+                        physics:
+                            const NeverScrollableScrollPhysics(), // disable swipe
+                        children: [
+                          StepBreedPage(),
+                          StepNamePage(
+                            breed: state.selectedBreed,
+                            name: state.name,
                           ),
-                        ),
-                        const SizedBox(height: x3),
-                        RegularFilledButton(
-                          onPressed: () => _onPressed(context),
-                          text: 'Continue',
-                          expanded: true,
-                          enabled: state.submitButtonEnabled,
-                        ),
-                      ],
+                          StepDetailsPage(),
+                          StepBirthdayPage(),
+                          StepWeightPage(),
+                        ],
+                      ),
+                      onSubmitPressed: () => _onPressed(context),
+                      submitEnabled: state.submitEnabled,
                     ),
                   ),
                 ],

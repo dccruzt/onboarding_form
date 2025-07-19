@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/design_system/extensions/widget_list_ext.dart';
+
 class StepBirthdayPage extends StatelessWidget {
   const StepBirthdayPage({super.key});
 
@@ -9,7 +11,9 @@ class StepBirthdayPage extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Text('Birthday Step', style: theme.textTheme.headlineSmall)],
+      children: [
+        Text('Birthday Step', style: theme.textTheme.headlineSmall),
+      ].withX4Spacer(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:onboarding_form/common/design_system/extensions/widget_list_ext.dart';
 
 import '../../../../common/design_system/components/regular_dropdown_button.dart';
 import '../../../../common/design_system/spacings.dart';
@@ -29,12 +30,10 @@ class StepBreedPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/images/search.png', width: x15, height: x15),
-              const SizedBox(height: x4),
               Text(
                 'What breed is your doggy?',
                 style: theme.textTheme.headlineSmall,
               ),
-              const SizedBox(height: x4),
               if (state.breeds.isNotEmpty)
                 RegularDropdownButton<Breed>(
                   items: state.breeds,
@@ -43,7 +42,7 @@ class StepBreedPage extends StatelessWidget {
                   labelBuilder: (breed) => breed.name,
                   onTap: onboardingCubit.selectBreed,
                 ),
-            ],
+            ].withX4Spacer(),
           );
         },
       ),

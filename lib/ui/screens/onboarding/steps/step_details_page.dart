@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/design_system/extensions/widget_list_ext.dart';
+
 class StepDetailsPage extends StatelessWidget {
   const StepDetailsPage({super.key});
 
@@ -9,7 +11,9 @@ class StepDetailsPage extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Text('Details Step', style: theme.textTheme.headlineSmall)],
+      children: [
+        Text('Details Step', style: theme.textTheme.headlineSmall),
+      ].withX4Spacer(),
     );
   }
 }

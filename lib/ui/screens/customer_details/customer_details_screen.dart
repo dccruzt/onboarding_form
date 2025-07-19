@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onboarding_form/common/design_system/components/regular_filled_button.dart';
 
+import '../../../common/design_system/extensions/widget_list_ext.dart';
 import '../../../common/design_system/spacings.dart';
 import '../../controller/customer_details/customer_details_controller.dart';
+import '../../widgets/form_content.dart';
 
 class CustomerDetailsScreen extends StatefulWidget {
   const CustomerDetailsScreen({super.key, this.address});
@@ -46,40 +47,34 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
                 listener: (context, state) {
                   _addressController.text = state.address ?? '';
                 },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/thumbs_up.png',
-                      width: x15,
-                      height: x15,
-                    ),
-                    const SizedBox(height: x4),
-                    Text(
-                      'We are almost there! Please provide your name and address',
-                      style: theme.textTheme.headlineSmall,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: x4),
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Name'),
-                      controller: _nameController,
-                      focusNode: _nameFocusNode,
-                    ),
-                    const SizedBox(height: x4),
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Address'),
-                      controller: _addressController,
-                      focusNode: _addressFocusNode,
-                      autofocus: true,
-                    ),
-                    const SizedBox(height: x4),
-                    RegularFilledButton(
-                      onPressed: () {},
-                      text: 'Submit',
-                      expanded: true,
-                    ),
-                  ],
+                child: FormContent(
+                  body: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/thumbs_up.png',
+                        width: x15,
+                        height: x15,
+                      ),
+                      Text(
+                        'We are almost there! Please provide your name and address',
+                        style: theme.textTheme.headlineSmall,
+                        textAlign: TextAlign.center,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(labelText: 'Name'),
+                        controller: _nameController,
+                        focusNode: _nameFocusNode,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(labelText: 'Address'),
+                        controller: _addressController,
+                        focusNode: _addressFocusNode,
+                        autofocus: true,
+                      ),
+                    ].withX4Spacer(),
+                  ),
+                  onSubmitPressed: () {},
                 ),
               ),
             ),

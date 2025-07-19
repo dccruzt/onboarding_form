@@ -46,33 +46,33 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   void performValidations() {
     switch (state.index.toStep()) {
       case Step.breed:
-        _emit(submitButtonEnabled: true);
+        _emit(submitEnabled: true);
         break;
       case Step.name:
-        _emit(submitButtonEnabled: state.isNameValid);
+        _emit(submitEnabled: state.isNameValid);
         break;
       case Step.details:
-        _emit(submitButtonEnabled: true);
+        _emit(submitEnabled: true);
         break;
       case Step.birthday:
-        _emit(submitButtonEnabled: true);
+        _emit(submitEnabled: true);
         break;
       case Step.weight:
-        _emit(submitButtonEnabled: true);
+        _emit(submitEnabled: true);
         break;
     }
   }
 
   void _emit({
     int? index,
-    bool? submitButtonEnabled,
+    bool? submitEnabled,
     Breed? selectedBreed,
     String? name,
     Object? error,
   }) => emit(
     state.copyWith(
       index: index,
-      submitButtonEnabled: submitButtonEnabled,
+      submitEnabled: submitEnabled,
       selectedBreed: selectedBreed,
       name: name,
       error: error,
@@ -83,14 +83,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
 class OnboardingState extends Equatable {
   const OnboardingState({
     this.index = 0,
-    this.submitButtonEnabled = true,
+    this.submitEnabled = true,
     this.selectedBreed,
     this.name,
     this.error,
   });
 
   final int index;
-  final bool submitButtonEnabled;
+  final bool submitEnabled;
   final Breed? selectedBreed;
   final String? name;
   final Object? error;
@@ -99,24 +99,18 @@ class OnboardingState extends Equatable {
 
   OnboardingState copyWith({
     int? index,
-    bool? submitButtonEnabled,
+    bool? submitEnabled,
     Breed? selectedBreed,
     String? name,
     Object? error,
   }) => OnboardingState(
     index: index ?? this.index,
-    submitButtonEnabled: submitButtonEnabled ?? this.submitButtonEnabled,
+    submitEnabled: submitEnabled ?? this.submitEnabled,
     selectedBreed: selectedBreed ?? this.selectedBreed,
     name: name ?? this.name,
     error: error ?? this.error,
   );
 
   @override
-  List<Object?> get props => [
-    index,
-    submitButtonEnabled,
-    selectedBreed,
-    name,
-    error,
-  ];
+  List<Object?> get props => [index, submitEnabled, selectedBreed, name, error];
 }

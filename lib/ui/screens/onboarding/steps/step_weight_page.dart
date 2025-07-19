@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/design_system/extensions/widget_list_ext.dart';
+
 class StepWeightPage extends StatelessWidget {
   const StepWeightPage({super.key});
 
@@ -9,7 +11,9 @@ class StepWeightPage extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Text('Weight Step', style: theme.textTheme.headlineSmall)],
+      children: [
+        Text('Weight Step', style: theme.textTheme.headlineSmall),
+      ].withX4Spacer(),
     );
   }
 }
