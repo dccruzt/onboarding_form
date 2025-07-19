@@ -59,9 +59,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             controller: _controller,
                             physics:
                                 const NeverScrollableScrollPhysics(), // disable swipe
-                            children: const [
+                            children: [
                               StepBreedPage(),
-                              StepNamePage(),
+                              StepNamePage(breed: state.selectedBreed),
                               StepDetailsPage(),
                               StepBirthdayPage(),
                               StepWeightPage(),

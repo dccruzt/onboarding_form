@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
-class RegularDropdownButton extends StatefulWidget {
+class RegularDropdownButton<T> extends StatefulWidget {
   const RegularDropdownButton({
     super.key,
     required this.items,
     required this.selectedItem,
+    required this.labelBuilder,
     required this.onTap,
   });
 
-  final List<DropdownItem> items;
-  final DropdownItem selectedItem;
-  final ValueChanged<DropdownItem> onTap;
+  final List<T> items;
+  final T selectedItem;
+  final String Function(T) labelBuilder;
+
+  final ValueChanged<T> onTap;
 
   @override
-  State<RegularDropdownButton> createState() => _RegularDropdownButtonState();
+  State<RegularDropdownButton<T>> createState() =>
+      _RegularDropdownButtonState<T>();
 }
 
-class _RegularDropdownButtonState extends State<RegularDropdownButton> {
-  late DropdownItem _dropdownValue;
+class _RegularDropdownButtonState<T> extends State<RegularDropdownButton<T>> {
+  late T _dropdownValue;
 
   @override
   void initState() {
@@ -28,40 +32,25 @@ class _RegularDropdownButtonState extends State<RegularDropdownButton> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<DropdownItem>(
+    return DropdownMenu<T>(
       initialSelection: _dropdownValue,
-      onSelected: (DropdownItem? value) {
+      onSelected: (T? value) {
+        if (value == null) return;
+
         setState(() {
-          _dropdownValue = value!;
-          widget.onTap.call(value);
+          _dropdownValue = value;
         });
+
+        widget.onTap.call(value);
       },
       dropdownMenuEntries: widget.items
-          .map<DropdownMenuEntry<DropdownItem>>(
-            (DropdownItem value) => DropdownMenuEntry<DropdownItem>(
-              value: value,
-              label: value.name,
+          .map<DropdownMenuEntry<T>>(
+            (T item) => DropdownMenuEntry<T>(
+              value: item,
+              label: widget.labelBuilder(item),
             ),
           )
           .toList(),
     );
   }
-}
-
-class DropdownItem {
-  const DropdownItem({required this.id, required this.name});
-
-  final String id;
-  final String name;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is DropdownItem &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          name == other.name;
-
-  @override
-  int get hashCode => id.hashCode ^ name.hashCode;
 }
