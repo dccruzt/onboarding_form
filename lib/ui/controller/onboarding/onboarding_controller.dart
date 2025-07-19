@@ -39,7 +39,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     _emit(selectedBreed: breed);
   }
 
-  void setName(String name) {
+  void onChangeName(String name) {
     _emit(name: name);
   }
 

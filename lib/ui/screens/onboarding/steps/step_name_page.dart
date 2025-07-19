@@ -42,7 +42,7 @@ class _StepNamePageState extends State<StepNamePage> {
           controller: _controller,
           autofocus: true,
           textCapitalization: TextCapitalization.words,
-          onChanged: OnboardingCubitProvider.of(context).setName,
+          onChanged: OnboardingCubitProvider.of(context).onChangeName,
         ),
       ],
     );

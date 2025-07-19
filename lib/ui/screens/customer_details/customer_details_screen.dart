@@ -43,11 +43,11 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
           behavior: HitTestBehavior.opaque,
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: CustomerDetailsCubitProvider(
-            child: BlocListener<CustomerDetailsCubit, CustomerDetailsState>(
+            child: BlocConsumer<CustomerDetailsCubit, CustomerDetailsState>(
               listener: (context, state) {
                 _addressController.text = state.address ?? '';
               },
-              child: FormContent(
+              builder: (context, state) => FormContent(
                 body: FormBody(
                   header: Image.asset(
                     AssetNames.thumbsUp,
@@ -62,15 +62,22 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
                       controller: _nameController,
                       focusNode: _nameFocusNode,
                       autofocus: true,
+                      onChanged: CustomerDetailsCubitProvider.of(
+                        context,
+                      ).onChangeName,
                     ),
                     TextField(
                       decoration: InputDecoration(labelText: 'Address'),
                       controller: _addressController,
                       focusNode: _addressFocusNode,
+                      onChanged: CustomerDetailsCubitProvider.of(
+                        context,
+                      ).onChangeAddress,
                     ),
                   ],
                 ),
                 submitType: SubmitType.submit,
+                submitEnabled: state.submitEnabled,
                 onSubmitPressed: () {},
               ),
             ),

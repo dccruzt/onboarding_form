@@ -36,22 +36,39 @@ class CustomerDetailsCubit extends Cubit<CustomerDetailsState> {
         .catchError((error) => _emit(error: error));
   }
 
-  void _emit({String? address, Object? error}) =>
-      emit(state.copyWith(address: address, error: error));
+  void onChangeName(String name) {
+    _emit(name: name);
+  }
+
+  void onChangeAddress(String address) {
+    _emit(address: address);
+  }
+
+  void _emit({String? name, String? address, Object? error}) =>
+      emit(state.copyWith(name: name, address: address, error: error));
 }
 
 class CustomerDetailsState extends Equatable {
-  const CustomerDetailsState({this.address, this.error});
+  const CustomerDetailsState({this.name, this.address, this.error});
 
+  final String? name;
   final String? address;
   final Object? error;
 
-  CustomerDetailsState copyWith({String? address, Object? error}) =>
-      CustomerDetailsState(
-        address: address ?? this.address,
-        error: error ?? this.error,
-      );
+  bool get submitEnabled =>
+      (name?.trim().isNotEmpty ?? false) &&
+      (address?.trim().isNotEmpty ?? false);
+
+  CustomerDetailsState copyWith({
+    String? name,
+    String? address,
+    Object? error,
+  }) => CustomerDetailsState(
+    name: name ?? this.name,
+    address: address ?? this.address,
+    error: error ?? this.error,
+  );
 
   @override
-  List<Object?> get props => [address, error];
+  List<Object?> get props => [name, address, error];
 }
