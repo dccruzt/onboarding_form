@@ -34,6 +34,7 @@ class _RegularDropdownButtonState<T> extends State<RegularDropdownButton<T>> {
   Widget build(BuildContext context) {
     return DropdownMenu<T>(
       initialSelection: _dropdownValue,
+      label: Text('Select an option'),
       onSelected: (T? value) {
         if (value == null) return;
 

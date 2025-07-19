@@ -6,7 +6,8 @@ import 'common/design_system/spacings.dart';
 import 'common/design_system/theme_data.dart';
 import 'common/navigation/app_routes.dart';
 import 'di/dependencies.dart';
-import 'ui/screens/onboarding_screen.dart';
+import 'ui/screens/customer_details/customer_details_screen.dart';
+import 'ui/screens/onboarding/onboarding_screen.dart';
 
 void main() {
   _setupDependencies();
@@ -27,7 +28,10 @@ class MyApp extends StatelessWidget {
       theme: LightThemeVariation().lightAppThemeData,
       darkTheme: DarkThemeVariation().darkAppThemeData,
       home: const MyHomePage(),
-      routes: {AppRoutes.onboarding: (context) => const OnboardingScreen()},
+      routes: {
+        AppRoutes.onboarding: (context) => const OnboardingScreen(),
+        AppRoutes.customerDetails: (context) => const CustomerDetailsScreen(),
+      },
     );
   }
 }

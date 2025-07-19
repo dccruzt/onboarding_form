@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../common/design_system/spacings.dart';
-import '../../../domain/entities/breed.dart';
-import '../../controller/onboarding/onboarding_controller.dart';
+import '../../../../common/design_system/spacings.dart';
+import '../../../../domain/entities/breed.dart';
+import '../../../controller/onboarding/onboarding_controller.dart';
 
 class StepNamePage extends StatefulWidget {
   const StepNamePage({super.key, required this.breed, this.name});

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../common/design_system/components/regular_filled_button.dart';
-import '../../common/design_system/spacings.dart';
-import '../controller/onboarding/onboarding_controller.dart';
-import '../extensions/int_ext.dart';
-import '../widgets/form_content.dart';
+import '../../../common/design_system/components/regular_filled_button.dart';
+import '../../../common/design_system/spacings.dart';
+import '../../../common/navigation/app_routes.dart';
+import '../../controller/onboarding/onboarding_controller.dart';
+import '../../extensions/int_ext.dart';
+import '../../widgets/form_content.dart';
 import 'steps/step_birthday_page.dart';
 import 'steps/step_breed_page.dart';
 import 'steps/step_details_page.dart';
@@ -104,6 +105,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  void _onPressed(BuildContext context) =>
-      OnboardingCubitProvider.of(context).nextStep();
+  void _onPressed(BuildContext context) {
+    final onboardingCubit = OnboardingCubitProvider.of(context);
+    final step = onboardingCubit.state.index.toStep();
+
+    step.isLast
+        ? Navigator.pushNamed(context, AppRoutes.customerDetails)
+        : onboardingCubit.nextStep();
+  }
 }

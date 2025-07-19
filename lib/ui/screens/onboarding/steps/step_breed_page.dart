@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../common/design_system/components/regular_dropdown_button.dart';
-import '../../../common/design_system/spacings.dart';
-import '../../../domain/entities/breed.dart';
-import '../../controller/onboarding/onboarding_controller.dart';
-import '../../controller/onboarding/steps/step_breed_controller.dart';
+import '../../../../common/design_system/components/regular_dropdown_button.dart';
+import '../../../../common/design_system/spacings.dart';
+import '../../../../domain/entities/breed.dart';
+import '../../../controller/onboarding/onboarding_controller.dart';
+import '../../../controller/onboarding/steps/step_breed_controller.dart';
 
 class StepBreedPage extends StatelessWidget {
   const StepBreedPage({super.key});
