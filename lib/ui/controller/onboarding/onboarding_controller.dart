@@ -21,14 +21,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   static const int totalSteps = 5;
 
   void nextStep() {
-    if (state.step < totalSteps - 1) {
-      _emit(step: state.step + 1);
+    if (state.index < totalSteps - 1) {
+      _emit(index: state.index + 1);
     }
   }
 
   void previousStep() {
-    if (state.step > 0) {
-      _emit(step: state.step - 1);
+    if (state.index > 0) {
+      _emit(index: state.index - 1);
     }
   }
 
@@ -36,25 +36,25 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     _emit(selectedBreed: breed);
   }
 
-  void _emit({int? step, Breed? selectedBreed, Object? error}) => emit(
-    state.copyWith(step: step, selectedBreed: selectedBreed, error: error),
+  void _emit({int? index, Breed? selectedBreed, Object? error}) => emit(
+    state.copyWith(index: index, selectedBreed: selectedBreed, error: error),
   );
 }
 
 class OnboardingState extends Equatable {
-  const OnboardingState({this.step = 0, this.selectedBreed, this.error});
+  const OnboardingState({this.index = 0, this.selectedBreed, this.error});
 
-  final int step;
+  final int index;
   final Breed? selectedBreed;
   final Object? error;
 
-  OnboardingState copyWith({int? step, Breed? selectedBreed, Object? error}) =>
+  OnboardingState copyWith({int? index, Breed? selectedBreed, Object? error}) =>
       OnboardingState(
-        step: step ?? this.step,
+        index: index ?? this.index,
         selectedBreed: selectedBreed ?? this.selectedBreed,
         error: error ?? this.error,
       );
 
   @override
-  List<Object?> get props => [step, selectedBreed, error];
+  List<Object?> get props => [index, selectedBreed, error];
 }

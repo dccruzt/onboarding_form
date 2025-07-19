@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/design_system/components/regular_filled_button.dart';
 import '../../core/design_system/spacings.dart';
 import '../controller/onboarding/onboarding_controller.dart';
+import '../extensions/int_ext.dart';
 import '../widgets/form_content.dart';
 import 'steps/step_birthday_page.dart';
 import 'steps/step_breed_page.dart';
@@ -40,14 +41,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return OnboardingCubitProvider(
       child: BlocConsumer<OnboardingCubit, OnboardingState>(
-        listener: (context, state) => _onCubitStepChanged(state.step),
+        listener: (context, state) => _onCubitStepChanged(state.index),
         builder: (context, state) {
-          final progress = (state.step + 1) / OnboardingCubit.totalSteps;
+          final progress = (state.index + 1) / OnboardingCubit.totalSteps;
 
           return Scaffold(
             appBar: AppBar(
               leading: BackButton(
-                onPressed: () => state.step == 0
+                onPressed: () => state.index.toStep().isFirst
                     ? Navigator.of(context).pop()
                     : OnboardingCubitProvider.of(context).previousStep(),
               ),
@@ -63,6 +64,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Flexible(
                           child: PageView(
                             controller: _controller,
+                            onPageChanged: (index) {
+                              if (!index.toStep().isName) {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                              }
+                            },
                             physics:
                                 const NeverScrollableScrollPhysics(), // disable swipe
                             children: [

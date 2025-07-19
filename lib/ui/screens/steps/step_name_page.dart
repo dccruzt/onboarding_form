@@ -3,15 +3,31 @@ import 'package:flutter/material.dart';
 import '../../../core/design_system/spacings.dart';
 import '../../../domain/entities/breed.dart';
 
-class StepNamePage extends StatelessWidget {
+class StepNamePage extends StatefulWidget {
   const StepNamePage({super.key, required this.breed});
 
   final Breed? breed;
 
   @override
+  State<StepNamePage> createState() => _StepNamePageState();
+}
+
+class _StepNamePageState extends State<StepNamePage> {
+  final FocusNode _focusNode = FocusNode();
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _focusNode.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final label = breed?.name ?? 'pet';
+    final label = widget.breed?.name ?? 'pet';
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -22,7 +38,9 @@ class StepNamePage extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: x4),
-        const TextField(
+        TextField(
+          focusNode: _focusNode,
+          controller: _controller,
           autofocus: true,
           textCapitalization: TextCapitalization.words,
         ),
