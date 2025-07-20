@@ -33,6 +33,7 @@ dev_dependencies:
   analyzer: ^7.6.0
 
   json_serializable:
+  mocktail: ^1.0.4
 
 flutter:
 
