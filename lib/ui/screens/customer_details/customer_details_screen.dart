@@ -39,71 +39,64 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: CustomerDetailsCubitProvider(
-            child: BlocConsumer<CustomerDetailsCubit, CustomerDetailsState>(
-              listener: (context, state) {
-                _addressController.text = state.address ?? '';
+        child: CustomerDetailsCubitProvider(
+          child: BlocConsumer<CustomerDetailsCubit, CustomerDetailsState>(
+            listener: (context, state) {
+              _addressController.text = state.address ?? '';
 
-                if (state.showDialog) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text(
-                        'Important',
-                        textAlign: TextAlign.center,
-                      ),
-                      content: const Text(
-                        textAlign: TextAlign.center,
-                        'There was a problem loading your location. Please provide it manually.',
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: const Text('Ok'),
-                        ),
-                      ],
+              if (state.showDialog) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Important', textAlign: TextAlign.center),
+                    content: const Text(
+                      textAlign: TextAlign.center,
+                      'There was a problem loading your location. Please provide it manually.',
                     ),
-                  );
-
-                  context.read<CustomerDetailsCubit>().onDialogShown();
-                }
-              },
-              builder: (context, state) => FormContent(
-                body: FormBody(
-                  header: Image.asset(
-                    AssetNames.thumbsUp,
-                    width: x15,
-                    height: x15,
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text('Ok'),
+                      ),
+                    ],
                   ),
-                  title:
-                      'We are almost there! Please provide your name and address',
-                  body: [
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Name'),
-                      controller: _nameController,
-                      focusNode: _nameFocusNode,
-                      autofocus: true,
-                      onChanged: CustomerDetailsCubitProvider.of(
-                        context,
-                      ).onChangeName,
-                    ),
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Address'),
-                      controller: _addressController,
-                      focusNode: _addressFocusNode,
-                      onChanged: CustomerDetailsCubitProvider.of(
-                        context,
-                      ).onChangeAddress,
-                    ),
-                  ],
+                );
+
+                context.read<CustomerDetailsCubit>().onDialogShown();
+              }
+            },
+            builder: (context, state) => FormContent(
+              body: FormBody(
+                header: Image.asset(
+                  AssetNames.thumbsUp,
+                  width: x15,
+                  height: x15,
                 ),
-                submitType: SubmitType.submit,
-                submitEnabled: state.submitEnabled,
-                onSubmitPressed: _onSubmitPressed,
+                title:
+                    'We are almost there! Please provide your name and address',
+                body: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Name'),
+                    controller: _nameController,
+                    focusNode: _nameFocusNode,
+                    autofocus: true,
+                    onChanged: CustomerDetailsCubitProvider.of(
+                      context,
+                    ).onChangeName,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Address'),
+                    controller: _addressController,
+                    focusNode: _addressFocusNode,
+                    onChanged: CustomerDetailsCubitProvider.of(
+                      context,
+                    ).onChangeAddress,
+                  ),
+                ],
               ),
+              submitType: SubmitType.submit,
+              submitEnabled: state.submitEnabled,
+              onSubmitPressed: _onSubmitPressed,
             ),
           ),
         ),

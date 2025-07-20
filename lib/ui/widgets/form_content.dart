@@ -20,18 +20,22 @@ class FormContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(x3),
-      child: Column(
-        children: [
-          Flexible(child: body),
-          RegularFilledButton(
-            onPressed: onSubmitPressed,
-            text: submitType.isNext ? 'Continue' : 'Submit',
-            expanded: true,
-            enabled: submitEnabled,
-          ),
-        ],
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Padding(
+        padding: const EdgeInsets.all(x3),
+        child: Column(
+          children: [
+            Flexible(child: body),
+            RegularFilledButton(
+              onPressed: onSubmitPressed,
+              text: submitType.isNext ? 'Continue' : 'Submit',
+              expanded: true,
+              enabled: submitEnabled,
+            ),
+          ],
+        ),
       ),
     );
   }
