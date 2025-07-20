@@ -46,6 +46,30 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
             child: BlocConsumer<CustomerDetailsCubit, CustomerDetailsState>(
               listener: (context, state) {
                 _addressController.text = state.address ?? '';
+
+                if (state.showDialog) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text(
+                        'Important',
+                        textAlign: TextAlign.center,
+                      ),
+                      content: const Text(
+                        textAlign: TextAlign.center,
+                        'There was a problem loading your location. Please provide it manually.',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('Ok'),
+                        ),
+                      ],
+                    ),
+                  );
+
+                  context.read<CustomerDetailsCubit>().onDialogShown();
+                }
               },
               builder: (context, state) => FormContent(
                 body: FormBody(
@@ -78,12 +102,16 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
                 ),
                 submitType: SubmitType.submit,
                 submitEnabled: state.submitEnabled,
-                onSubmitPressed: () {},
+                onSubmitPressed: _onSubmitPressed,
               ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _onSubmitPressed() {
+    Navigator.of(context).popUntil((route) => route.isFirst);
   }
 }

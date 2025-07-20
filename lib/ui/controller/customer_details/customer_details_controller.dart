@@ -32,7 +32,12 @@ class CustomerDetailsCubit extends Cubit<CustomerDetailsState> {
   Future<void> init() async {
     await loadAddressUseCase
         .call()
-        .then((value) => _emit(address: value))
+        .then(
+          (value) => _emit(
+            address: value,
+            error: value == null ? 'Failed to load address' : null,
+          ),
+        )
         .catchError((error) => _emit(error: error));
   }
 
@@ -44,16 +49,39 @@ class CustomerDetailsCubit extends Cubit<CustomerDetailsState> {
     _emit(address: address);
   }
 
-  void _emit({String? name, String? address, Object? error}) =>
-      emit(state.copyWith(name: name, address: address, error: error));
+  void onDialogShown() {
+    _emit(dialogShown: true);
+  }
+
+  void _emit({
+    String? name,
+    String? address,
+    bool? dialogShown,
+    Object? error,
+  }) => emit(
+    state.copyWith(
+      name: name,
+      address: address,
+      dialogShown: dialogShown,
+      error: error,
+    ),
+  );
 }
 
 class CustomerDetailsState extends Equatable {
-  const CustomerDetailsState({this.name, this.address, this.error});
+  const CustomerDetailsState({
+    this.name,
+    this.address,
+    this.dialogShown = false,
+    this.error,
+  });
 
   final String? name;
   final String? address;
+  final bool dialogShown;
   final Object? error;
+
+  bool get showDialog => error != null && !dialogShown;
 
   bool get submitEnabled =>
       (name?.trim().isNotEmpty ?? false) &&
@@ -62,13 +90,15 @@ class CustomerDetailsState extends Equatable {
   CustomerDetailsState copyWith({
     String? name,
     String? address,
+    bool? dialogShown,
     Object? error,
   }) => CustomerDetailsState(
     name: name ?? this.name,
     address: address ?? this.address,
+    dialogShown: dialogShown ?? this.dialogShown,
     error: error ?? this.error,
   );
 
   @override
-  List<Object?> get props => [name, address, error];
+  List<Object?> get props => [name, address, dialogShown, error];
 }
