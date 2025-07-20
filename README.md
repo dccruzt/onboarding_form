@@ -1,16 +1,38 @@
-# onboarding_form
+# Pet Onboarding App
 
-A new sample project for my repository
+A Flutter application that guides users through a multi-step onboarding process to register their pet's details. The flow is implemented using Cubit (from `flutter_bloc`) for state management and follows a form wizard approach with validation at each step.
 
-## Getting Started
+## 🧩 Steps in the Onboarding Flow
 
-This project is a starting point for a Flutter application.
+The onboarding consists of the following steps:
 
-A few resources to get you started if this is your first Flutter project:
+1. **Select Breed**: User selects a pet breed from a dropdown menu.
+2. **Enter Name**: User inputs the pet's name.
+3. **Provide Details**: User adds additional details like address.
+4. **Select Birthday**: User selects the pet's date of birth.
+5. **Enter Weight**: User inputs the pet's weight.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Navigation between steps is controlled programmatically via a `PageView` and a `submit` button that advances the flow after validations.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ✨ Features
+
+- **Multi-step Form Onboarding**: A guided form flow to collect pet-related data step by step.
+- **Automatic Location Retrieval**: On the final step, the user's current location is fetched automatically.
+- **Form Validation**: Each step validates user input and enables submission only when valid.
+
+## 🧪 Testing
+
+Includes widget tests that simulate user interactions and also unit test for the cubit.
+
+## 🛠 Tech Stack
+
+- **Flutter**: 3.32.4
+- **Dart**: 3.8.1
+- **State Management**: `flutter_bloc`
+
+## 🚀 Setup & Installation
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/dccruzt/onboarding_form.git
+   cd onboarding_form
