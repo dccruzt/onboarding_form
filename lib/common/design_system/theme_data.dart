@@ -6,8 +6,9 @@ part 'app_colors.dart';
 part 'color_scheme.dart';
 part 'theme_data/app_bar_theme.dart';
 part 'theme_data/button_theme.dart';
-part 'theme_data/dropdown_theme.dart';
+part 'theme_data/dropdown_menu_theme.dart';
 part 'theme_data/input_decoration_theme.dart';
+part 'theme_data/segmented_button_theme.dart';
 part 'theme_data/text_theme.dart';
 
 class LightThemeVariation {
@@ -24,6 +25,7 @@ class LightThemeVariation {
     ),
     inputDecorationTheme: _inputDecorationTheme(_colorScheme),
     dropdownMenuTheme: _dropdownMenuTheme(_colorScheme),
+    segmentedButtonTheme: _segmentedButtonTheme(_colorScheme),
   );
 }
 
@@ -41,5 +43,6 @@ class DarkThemeVariation {
     ),
     inputDecorationTheme: _inputDecorationTheme(_colorScheme),
     dropdownMenuTheme: _dropdownMenuTheme(_colorScheme),
+    segmentedButtonTheme: _segmentedButtonTheme(_colorScheme),
   );
 }

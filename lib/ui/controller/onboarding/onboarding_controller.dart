@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/entities/breed.dart';
+import '../../../domain/entities/pet_gender.dart';
 import '../../../domain/entities/step.dart';
 import '../../extensions/int_ext.dart';
 
@@ -43,6 +44,18 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     _emit(name: name);
   }
 
+  void selectGender(PetGender gender) {
+    _emit(gender: gender);
+  }
+
+  void selectIsSterilized(bool isSterilized) {
+    _emit(isSterilized: isSterilized);
+  }
+
+  void selectIsPregnantOrLactating(bool isPregnantOrLactating) {
+    _emit(isPregnantOrLactating: isPregnantOrLactating);
+  }
+
   void performValidations() {
     switch (state.index.toStep()) {
       case Step.breed:
@@ -68,6 +81,9 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     bool? submitEnabled,
     Breed? selectedBreed,
     String? name,
+    PetGender? gender,
+    bool? isSterilized,
+    bool? isPregnantOrLactating,
     Object? error,
   }) => emit(
     state.copyWith(
@@ -75,6 +91,9 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       submitEnabled: submitEnabled,
       selectedBreed: selectedBreed,
       name: name,
+      gender: gender,
+      isSterilized: isSterilized,
+      isPregnantOrLactating: isPregnantOrLactating,
       error: error,
     ),
   );
@@ -86,6 +105,9 @@ class OnboardingState extends Equatable {
     this.submitEnabled = true,
     this.selectedBreed,
     this.name,
+    this.gender = PetGender.male,
+    this.isSterilized = false,
+    this.isPregnantOrLactating = false,
     this.error,
   });
 
@@ -93,6 +115,9 @@ class OnboardingState extends Equatable {
   final bool submitEnabled;
   final Breed? selectedBreed;
   final String? name;
+  final PetGender gender;
+  final bool isSterilized;
+  final bool isPregnantOrLactating;
   final Object? error;
 
   bool get isNameValid => name?.trim().isNotEmpty ?? false;
@@ -102,15 +127,30 @@ class OnboardingState extends Equatable {
     bool? submitEnabled,
     Breed? selectedBreed,
     String? name,
+    PetGender? gender,
+    bool? isSterilized,
+    bool? isPregnantOrLactating,
     Object? error,
   }) => OnboardingState(
     index: index ?? this.index,
     submitEnabled: submitEnabled ?? this.submitEnabled,
     selectedBreed: selectedBreed ?? this.selectedBreed,
     name: name ?? this.name,
+    gender: gender ?? this.gender,
+    isSterilized: isSterilized ?? this.isSterilized,
+    isPregnantOrLactating: isPregnantOrLactating ?? this.isPregnantOrLactating,
     error: error ?? this.error,
   );
 
   @override
-  List<Object?> get props => [index, submitEnabled, selectedBreed, name, error];
+  List<Object?> get props => [
+    index,
+    submitEnabled,
+    selectedBreed,
+    name,
+    gender,
+    isSterilized,
+    isPregnantOrLactating,
+    error,
+  ];
 }
