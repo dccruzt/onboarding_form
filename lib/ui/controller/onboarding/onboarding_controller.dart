@@ -48,12 +48,12 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     _emit(gender: gender);
   }
 
-  void selectIsSterilized(bool isSterilized) {
-    _emit(isSterilized: isSterilized);
+  void selectIsNeutered(bool isNeutered) {
+    _emit(isNeutered: isNeutered);
   }
 
-  void selectIsPregnantOrLactating(bool isPregnantOrLactating) {
-    _emit(isPregnantOrLactating: isPregnantOrLactating);
+  void selectIsPregnantOrNursing(bool isPregnantOrNursing) {
+    _emit(isPregnantOrNursing: isPregnantOrNursing);
   }
 
   void performValidations() {
@@ -82,8 +82,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     Breed? selectedBreed,
     String? name,
     PetGender? gender,
-    bool? isSterilized,
-    bool? isPregnantOrLactating,
+    bool? isNeutered,
+    bool? isPregnantOrNursing,
     Object? error,
   }) => emit(
     state.copyWith(
@@ -92,8 +92,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       selectedBreed: selectedBreed,
       name: name,
       gender: gender,
-      isSterilized: isSterilized,
-      isPregnantOrLactating: isPregnantOrLactating,
+      isNeutered: isNeutered,
+      isPregnantOrNursing: isPregnantOrNursing,
       error: error,
     ),
   );
@@ -106,8 +106,8 @@ class OnboardingState extends Equatable {
     this.selectedBreed,
     this.name,
     this.gender = PetGender.male,
-    this.isSterilized = false,
-    this.isPregnantOrLactating = false,
+    this.isNeutered = false,
+    this.isPregnantOrNursing = false,
     this.error,
   });
 
@@ -116,8 +116,8 @@ class OnboardingState extends Equatable {
   final Breed? selectedBreed;
   final String? name;
   final PetGender gender;
-  final bool isSterilized;
-  final bool isPregnantOrLactating;
+  final bool isNeutered;
+  final bool isPregnantOrNursing;
   final Object? error;
 
   bool get isNameValid => name?.trim().isNotEmpty ?? false;
@@ -128,8 +128,8 @@ class OnboardingState extends Equatable {
     Breed? selectedBreed,
     String? name,
     PetGender? gender,
-    bool? isSterilized,
-    bool? isPregnantOrLactating,
+    bool? isNeutered,
+    bool? isPregnantOrNursing,
     Object? error,
   }) => OnboardingState(
     index: index ?? this.index,
@@ -137,8 +137,8 @@ class OnboardingState extends Equatable {
     selectedBreed: selectedBreed ?? this.selectedBreed,
     name: name ?? this.name,
     gender: gender ?? this.gender,
-    isSterilized: isSterilized ?? this.isSterilized,
-    isPregnantOrLactating: isPregnantOrLactating ?? this.isPregnantOrLactating,
+    isNeutered: isNeutered ?? this.isNeutered,
+    isPregnantOrNursing: isPregnantOrNursing ?? this.isPregnantOrNursing,
     error: error ?? this.error,
   );
 
@@ -149,8 +149,8 @@ class OnboardingState extends Equatable {
     selectedBreed,
     name,
     gender,
-    isSterilized,
-    isPregnantOrLactating,
+    isNeutered,
+    isPregnantOrNursing,
     error,
   ];
 }

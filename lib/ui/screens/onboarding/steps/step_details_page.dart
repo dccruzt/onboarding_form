@@ -12,13 +12,13 @@ class StepDetailsPage extends StatelessWidget {
   const StepDetailsPage({
     super.key,
     required this.gender,
-    required this.isSterilized,
-    required this.isPregnantOrLactating,
+    required this.isNeutered,
+    required this.isPregnantOrNursing,
   });
 
   final PetGender gender;
-  final bool isSterilized;
-  final bool isPregnantOrLactating;
+  final bool isNeutered;
+  final bool isPregnantOrNursing;
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +35,10 @@ class StepDetailsPage extends StatelessWidget {
         Text('Is it neutered?', style: theme.textTheme.headlineSmall),
         SegmentedToggle<Choice>(
           values: Choice.values,
-          selected: isSterilized.toChoice(),
+          selected: isNeutered.toChoice(),
           onChanged: (choice) => OnboardingCubitProvider.of(
             context,
-          ).selectIsSterilized(choice.toBool()),
+          ).selectIsNeutered(choice.toBool()),
         ),
         Text(
           'Is it pregnant or nursing?',
@@ -46,10 +46,10 @@ class StepDetailsPage extends StatelessWidget {
         ),
         SegmentedToggle<Choice>(
           values: Choice.values,
-          selected: isPregnantOrLactating.toChoice(),
+          selected: isPregnantOrNursing.toChoice(),
           onChanged: (choice) => OnboardingCubitProvider.of(
             context,
-          ).selectIsPregnantOrLactating(choice.toBool()),
+          ).selectIsPregnantOrNursing(choice.toBool()),
         ),
       ],
     );

@@ -78,8 +78,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                           StepDetailsPage(
                             gender: state.gender,
-                            isSterilized: state.isSterilized,
-                            isPregnantOrLactating: state.isPregnantOrLactating,
+                            isNeutered: state.isNeutered,
+                            isPregnantOrNursing: state.isPregnantOrNursing,
                           ),
                           StepBirthdayPage(),
                           StepWeightPage(),
